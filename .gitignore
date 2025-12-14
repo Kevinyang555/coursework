@@ -1,0 +1,78 @@
+# ========================================
+# ECE385 Branch - Exclude Vivado Projects
+# ========================================
+# Only track Code/ exports, not full Vivado projects
+ECE_385/lab2.2/
+ECE_385/lab3/
+ECE_385/lab4_Final/
+ECE_385/lab5/
+ECE_385/Lab_6/
+ECE_385/lab7/
+ECE_385/adder2/
+ECE_385/fritzing*/
+ECE_385/Final_Project/
+ECE_385/ip_repo/
+
+# Exclude Final Project from Code/ (separate repository)
+ECE_385/Code/Final_Project/
+
+# Exclude Claude Code files everywhere
+CLAUDE.md
+.claude/
+**/CLAUDE.md
+**/.claude/
+
+# Vivado build artifacts
+*.jou
+*.log
+*.str
+*.xpr
+*.xpr.bak
+*.runs/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.gen/
+.Xil/
+*.dcp
+*.bit
+*.ltx
+
+# Vitis workspace artifacts
+.metadata/
+RemoteSystemsTempFiles/
+Debug/
+Release/
+*.elf
+*.o
+*.d
+
+# Block design wrappers (auto-generated)
+*_wrapper.v
+*_wrapper.sv
+
+# IP generated files
+blk_mem_gen_*/
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+venv/
+*.egg-info/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+
+# Large binary files
+*.pdf
+*.bin
