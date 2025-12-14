@@ -12,7 +12,15 @@ ECE_385/adder2/
 ECE_385/fritzing*/
 ECE_385/Final_Project/
 ECE_385/ip_repo/
-ECE_385/CLAUDE.md
+
+# Exclude Final Project from Code/ (separate repository)
+ECE_385/Code/Final_Project/
+
+# Exclude Claude Code files everywhere
+CLAUDE.md
+.claude/
+**/CLAUDE.md
+**/.claude/
 
 # Vivado build artifacts
 *.jou
