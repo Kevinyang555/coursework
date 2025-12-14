@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench8_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_Control_sv_519048831 " />
+            <top_module name="glbl" />
+            <top_module name="testbench8" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,000.000 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="115"></NameColumnWidth>
+      <ValueColumnWidth column_width="59"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="15" />
+   <wvobject fp_name="/testbench8/Clk" type="logic">
+      <obj_property name="ElementShortName">Clk</obj_property>
+      <obj_property name="ObjectShortName">Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/Reset" type="logic">
+      <obj_property name="ElementShortName">Reset</obj_property>
+      <obj_property name="ObjectShortName">Reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/LoadA" type="logic">
+      <obj_property name="ElementShortName">LoadA</obj_property>
+      <obj_property name="ObjectShortName">LoadA</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/LoadB" type="logic">
+      <obj_property name="ElementShortName">LoadB</obj_property>
+      <obj_property name="ObjectShortName">LoadB</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/Execute" type="logic">
+      <obj_property name="ElementShortName">Execute</obj_property>
+      <obj_property name="ObjectShortName">Execute</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/Din" type="array">
+      <obj_property name="ElementShortName">Din[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Din[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/F" type="array">
+      <obj_property name="ElementShortName">F[2:0]</obj_property>
+      <obj_property name="ObjectShortName">F[2:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/R" type="array">
+      <obj_property name="ElementShortName">R[1:0]</obj_property>
+      <obj_property name="ObjectShortName">R[1:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/LED" type="array">
+      <obj_property name="ElementShortName">LED[3:0]</obj_property>
+      <obj_property name="ObjectShortName">LED[3:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/Aval" type="array">
+      <obj_property name="ElementShortName">Aval[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Aval[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/Bval" type="array">
+      <obj_property name="ElementShortName">Bval[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Bval[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/hex_seg" type="array">
+      <obj_property name="ElementShortName">hex_seg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">hex_seg[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/hex_grid" type="array">
+      <obj_property name="ElementShortName">hex_grid[3:0]</obj_property>
+      <obj_property name="ObjectShortName">hex_grid[3:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/ans_1a" type="array">
+      <obj_property name="ElementShortName">ans_1a[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ans_1a[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/ans_2b" type="array">
+      <obj_property name="ElementShortName">ans_2b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ans_2b[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+</wave_config>

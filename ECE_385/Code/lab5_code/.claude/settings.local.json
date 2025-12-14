@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/kevin/ECE_385/Code/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
