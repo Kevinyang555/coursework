@@ -1,0 +1,146 @@
+================================================================================
+AXI WRITE CODE FOR LAB REPORT - WEEK 2 TESTBENCH
+================================================================================
+NetIDs: ky23 and yifei28
+String: "ky23 and yifei28 completed ECE 385! "
+Colors:
+  - ky23 and yifei28: BLUE (0, 0, F) - Color Index 2
+  - ECE 385!: ORANGE (F, A, 0) - Color Index 3
+  - Other text: WHITE (F, F, F) - Color Index 1
+  - Background: BLACK (0, 0, 0) - Color Index 0
+================================================================================
+
+//========================================================================
+// HELPER FUNCTION (Declared at module level, before initial block)
+//========================================================================
+// Week 2 Character Format (16 bits per character):
+//   Bit[15]: IV (invert)
+//   Bits[14:8]: CODE (ASCII 7 bits)
+//   Bits[7:4]: FGD_IDX (foreground color index)
+//   Bits[3:0]: BKG_IDX (background color index)
+// NOTE: Color indices are XORed with 0xE for hardware compensation
+//       This matches the compensation in hdmi_text_controller.c
+function logic [15:0] make_char(input logic [6:0] ascii, input logic [3:0] fg, input logic [3:0] bg);
+    logic [3:0] fg_comp, bg_comp;
+    fg_comp = fg ^ 4'hE;  // XOR with 0xE for compensation
+    bg_comp = bg ^ 4'hE;  // XOR with 0xE for compensation
+    make_char = {1'b0, ascii, fg_comp, bg_comp};
+endfunction
+
+//========================================================================
+// STEP 1: COLOR PALETTE SETUP (Addresses 0x2000-0x201F)
+// Note: The following code goes inside the initial block
+//========================================================================
+// Palette Entry Format: [UNUSED(4) | C1_R(4) | C1_G(4) | C1_B(4) | UNUSED(4) | C0_R(4) | C0_G(4) | C0_B(4)]
+
+// Color 0: BLACK (0x000) and Color 1: WHITE (0xFFF)
+repeat (4) @(posedge aclk) axi_write(32'h00002000, 32'h0FFF0000);
+
+// Color 2: ORANGE (0xFA0) and Color 3: BLUE (0x00F) - swapped to match hardware
+repeat (4) @(posedge aclk) axi_write(32'h00002004, 32'h000F0FA0);
+
+// Remaining palette entries (colors 4-15)
+repeat (4) @(posedge aclk) axi_write(32'h00002008, 32'h00700700);
+repeat (4) @(posedge aclk) axi_write(32'h0000200C, 32'h07770007);
+repeat (4) @(posedge aclk) axi_write(32'h00002010, 32'h0CCC0888);
+repeat (4) @(posedge aclk) axi_write(32'h00002014, 32'h0EEE0AAA);
+repeat (4) @(posedge aclk) axi_write(32'h00002018, 32'h05550333);
+repeat (4) @(posedge aclk) axi_write(32'h0000201C, 32'h0DDD0999);
+
+//========================================================================
+// STEP 2: VRAM TEXT WRITES (Starting at address 0x0000)
+// String: "ky23 and yifei28 completed ECE 385! " (38 characters, 19 words)
+//========================================================================
+
+// Word 0 @ 0x0000: 'k' 'y' - both BLUE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000000,
+    {make_char(7'h79, 4'd2, 4'd0), make_char(7'h6B, 4'd2, 4'd0)});
+
+// Word 1 @ 0x0004: '2' '3' - both BLUE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000004,
+    {make_char(7'h33, 4'd2, 4'd0), make_char(7'h32, 4'd2, 4'd0)});
+
+// Word 2 @ 0x0008: ' ' 'a' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000008,
+    {make_char(7'h61, 4'd1, 4'd0), make_char(7'h20, 4'd1, 4'd0)});
+
+// Word 3 @ 0x000C: 'n' 'd' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h0000000C,
+    {make_char(7'h64, 4'd1, 4'd0), make_char(7'h6E, 4'd1, 4'd0)});
+
+// Word 4 @ 0x0010: ' ' 'y' - WHITE then BLUE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000010,
+    {make_char(7'h79, 4'd2, 4'd0), make_char(7'h20, 4'd1, 4'd0)});
+
+// Word 5 @ 0x0014: 'i' 'f' - both BLUE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000014,
+    {make_char(7'h66, 4'd2, 4'd0), make_char(7'h69, 4'd2, 4'd0)});
+
+// Word 6 @ 0x0018: 'e' 'i' - both BLUE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000018,
+    {make_char(7'h69, 4'd2, 4'd0), make_char(7'h65, 4'd2, 4'd0)});
+
+// Word 7 @ 0x001C: '2' '8' - both BLUE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h0000001C,
+    {make_char(7'h38, 4'd2, 4'd0), make_char(7'h32, 4'd2, 4'd0)});
+
+// Word 8 @ 0x0020: ' ' 'c' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000020,
+    {make_char(7'h63, 4'd1, 4'd0), make_char(7'h20, 4'd1, 4'd0)});
+
+// Word 9 @ 0x0024: 'o' 'm' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000024,
+    {make_char(7'h6D, 4'd1, 4'd0), make_char(7'h6F, 4'd1, 4'd0)});
+
+// Word 10 @ 0x0028: 'p' 'l' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000028,
+    {make_char(7'h6C, 4'd1, 4'd0), make_char(7'h70, 4'd1, 4'd0)});
+
+// Word 11 @ 0x002C: 'e' 't' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h0000002C,
+    {make_char(7'h74, 4'd1, 4'd0), make_char(7'h65, 4'd1, 4'd0)});
+
+// Word 12 @ 0x0030: 'e' 'd' - both WHITE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000030,
+    {make_char(7'h64, 4'd1, 4'd0), make_char(7'h65, 4'd1, 4'd0)});
+
+// Word 13 @ 0x0034: ' ' 'E' - WHITE then ORANGE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000034,
+    {make_char(7'h45, 4'd3, 4'd0), make_char(7'h20, 4'd1, 4'd0)});
+
+// Word 14 @ 0x0038: 'C' 'E' - both ORANGE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000038,
+    {make_char(7'h45, 4'd3, 4'd0), make_char(7'h43, 4'd3, 4'd0)});
+
+// Word 15 @ 0x003C: ' ' '3' - both ORANGE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h0000003C,
+    {make_char(7'h33, 4'd3, 4'd0), make_char(7'h20, 4'd3, 4'd0)});
+
+// Word 16 @ 0x0040: '8' '5' - both ORANGE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000040,
+    {make_char(7'h35, 4'd3, 4'd0), make_char(7'h38, 4'd3, 4'd0)});
+
+// Word 17 @ 0x0044: '!' ' ' - both ORANGE on BLACK
+repeat (4) @(posedge aclk) axi_write(32'h00000044,
+    {make_char(7'h20, 4'd3, 4'd0), make_char(7'h21, 4'd3, 4'd0)});
+
+//========================================================================
+// SUMMARY OF AXI WRITES
+//========================================================================
+// Total Palette Writes: 8 words (addresses 0x2000-0x201C)
+// Total VRAM Writes: 18 words (addresses 0x0000-0x0044)
+// Total AXI Transactions: 26 writes
+//
+// Character breakdown:
+//   - Characters 0-3:   "ky23" in BLUE (uses index 2, which holds ORANGE, swapped)
+//   - Characters 4-8:   " and " in WHITE (color index 1)
+//   - Characters 9-15:  "yifei28" in BLUE (uses index 2, which holds ORANGE, swapped)
+//   - Characters 16-27: " completed " in WHITE (color index 1)
+//   - Characters 28-37: "ECE 385! " in ORANGE (uses index 3, which holds BLUE, swapped)
+//   - All on BLACK background (color index 0)
+//
+// Notes:
+// - The make_char function applies XOR 0xE compensation matching the C driver
+// - Colors 2 and 3 are swapped in the palette to compensate for hardware behavior
+//   (hardware appears to swap indices 2 and 3 internally)
+//========================================================================
